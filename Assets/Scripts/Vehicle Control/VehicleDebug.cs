@@ -30,10 +30,6 @@ namespace RVP
 
         IEnumerator ResetRotation()
         {
-            if (GetComponent<VehicleDamage>())
-            {
-                GetComponent<VehicleDamage>().Repair();
-            }
 
             yield return new WaitForFixedUpdate();
             transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
@@ -44,10 +40,6 @@ namespace RVP
 
         IEnumerator ResetPosition()
         {
-            if (GetComponent<VehicleDamage>())
-            {
-                GetComponent<VehicleDamage>().Repair();
-            }
 
             transform.position = spawnPos;
             yield return new WaitForFixedUpdate();
