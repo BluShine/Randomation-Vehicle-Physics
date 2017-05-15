@@ -140,19 +140,6 @@ namespace RVP
         [System.NonSerialized]
         public bool skidSteerBrake;
 
-        [Header("Damage")]
-
-        [Tooltip("Point around which the suspension pivots when damaged")]
-        public Vector3 damagePivot;
-
-        [Tooltip("Compression amount to remain at when wheel is detached")]
-        [Range(0, 1)]
-        public float detachedCompression = 0.5f;
-
-        public float jamForce = Mathf.Infinity;
-        [System.NonSerialized]
-        public bool jammed;
-
         void Start()
         {
             tr = transform;
@@ -212,7 +199,6 @@ namespace RVP
             }
             else
             {
-                compression = detachedCompression;
                 penetration = 0;
             }
 
@@ -427,8 +413,6 @@ namespace RVP
             }
 
             Gizmos.color = Color.red;
-
-            Gizmos.DrawWireSphere(tr.TransformPoint(damagePivot), 0.05f);
         }
     }
 }

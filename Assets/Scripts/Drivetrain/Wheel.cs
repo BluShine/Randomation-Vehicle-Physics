@@ -620,7 +620,7 @@ namespace RVP
             }
 
             //Set final RPM
-            if (!suspensionParent.jammed && connected)
+            if (connected)
             {
                 bool validTorque = (!(Mathf.Approximately(actualTorque, 0) && Mathf.Abs(actualTargetRPM) < 0.01f) && !Mathf.Approximately(actualTargetRPM, 0)) || brakeForce + actualEbrake * vp.ebrakeInput > 0;
 
