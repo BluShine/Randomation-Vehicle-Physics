@@ -870,6 +870,10 @@ Prefab:
       propertyPath: tireHitClips.Array.data[2]
       value: 
       objectReference: {fileID: 8300000, guid: 9c7391cace38b5f44bcec78e8019f9c5, type: 3}
+    - target: {fileID: 19970784, guid: 33c6a6d062ad9c646ad581e41024f891, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
     m_RemovedComponents:
     - {fileID: 11470106, guid: 33c6a6d062ad9c646ad581e41024f891, type: 2}
     - {fileID: 11406528, guid: 33c6a6d062ad9c646ad581e41024f891, type: 2}
