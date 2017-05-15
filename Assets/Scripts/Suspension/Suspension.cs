@@ -168,7 +168,7 @@ namespace RVP
                     setHardColliderRadiusFactor = hardColliderRadiusFactor;
                     hardColliderRadiusFactorPrev = setHardColliderRadiusFactor;
                     compressCol.radius = wheel.rimWidth * hardColliderRadiusFactor;
-                    compressCol.height = (wheel.popped ? wheel.rimRadius : Mathf.Lerp(wheel.rimRadius, wheel.tireRadius, wheel.tirePressure)) * 2;
+                    compressCol.height = Mathf.Lerp(wheel.rimRadius, wheel.tireRadius, wheel.tirePressure) * 2;
                     compressCol.material = GlobalControl.frictionlessMatStatic;
                 }
 
@@ -192,14 +192,10 @@ namespace RVP
 
             GetSpringVectors();
 
-            if (wheel.connected)
+            if (true)
             {
                 compression = Mathf.Min(targetCompression, suspensionDistance > 0 ? Mathf.Clamp01(wheel.contactPoint.distance / suspensionDistance) : 0);
                 penetration = Mathf.Min(0, wheel.contactPoint.distance);
-            }
-            else
-            {
-                penetration = 0;
             }
 
             if (targetCompression > 0)
@@ -212,7 +208,7 @@ namespace RVP
             {
                 setHardColliderRadiusFactor = hardColliderRadiusFactor;
 
-                if (hardColliderRadiusFactorPrev != setHardColliderRadiusFactor || wheel.updatedSize || wheel.updatedPopped)
+                if (hardColliderRadiusFactorPrev != setHardColliderRadiusFactor || wheel.updatedSize)
                 {
                     if (wheel.rimWidth > wheel.actualRadius)
                     {
@@ -232,7 +228,7 @@ namespace RVP
             }
 
             //Set the drive of the wheel
-            if (wheel.connected)
+            if (true)
             {
                 if (wheel.targetDrive)
                 {
@@ -262,7 +258,7 @@ namespace RVP
 
         void ApplySuspensionForce()
         {
-            if (wheel.grounded && wheel.connected)
+            if (wheel.grounded)
             {
                 //Get the local vertical velocity
                 float travelVel = vp.norm.InverseTransformDirection(rb.GetPointVelocity(tr.position)).z;
@@ -317,7 +313,7 @@ namespace RVP
 
         void GetCamber()
         {
-            if (solidAxleCamber && oppositeWheel && wheel.connected)
+            if (solidAxleCamber && oppositeWheel)
             {
                 if (oppositeWheel.wheel.rim && wheel.rim)
                 {
@@ -327,7 +323,7 @@ namespace RVP
             }
             else
             {
-                camberAngle = camberCurve.Evaluate((Application.isPlaying && wheel.connected ? wheel.travelDist : targetCompression)) + camberOffset;
+                camberAngle = camberCurve.Evaluate((Application.isPlaying ? wheel.travelDist : targetCompression)) + camberOffset;
             }
         }
 
