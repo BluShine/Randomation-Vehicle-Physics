@@ -87,7 +87,6 @@ namespace RVP
         public bool reversing;
 
         public Wheel[] wheels;
-        public HoverWheel[] hoverWheels;
         public WheelCheckGroup[] wheelGroups;
         bool wheelLoopDone = false;
         public bool hover;
@@ -350,20 +349,10 @@ namespace RVP
             //Get average suspension height
             if (suspensionCenterOfMass)
             {
-                if (hover)
+                for (int i = 0; i < wheels.Length; i++)
                 {
-                    for (int i = 0; i < hoverWheels.Length; i++)
-                    {
-                        susAverage = i == 0 ? hoverWheels[i].hoverDistance : (susAverage + hoverWheels[i].hoverDistance) * 0.5f;
-                    }
-                }
-                else
-                {
-                    for (int i = 0; i < wheels.Length; i++)
-                    {
-                        float newSusDist = wheels[i].transform.parent.GetComponent<Suspension>().suspensionDistance;
-                        susAverage = i == 0 ? newSusDist : (susAverage + newSusDist) * 0.5f;
-                    }
+                    float newSusDist = wheels[i].transform.parent.GetComponent<Suspension>().suspensionDistance;
+                    susAverage = i == 0 ? newSusDist : (susAverage + newSusDist) * 0.5f;
                 }
             }
 
@@ -376,36 +365,17 @@ namespace RVP
             groundedWheels = 0;
             wheelContactsVelocity = Vector3.zero;
 
-            if (hover)
+            for (int i = 0; i < wheels.Length; i++)
             {
-                for (int i = 0; i < hoverWheels.Length; i++)
+                if (wheels[i].grounded)
                 {
-
-                    if (hoverWheels[i].grounded)
-                    {
-                        wheelNormalAverage = i == 0 ? hoverWheels[i].contactPoint.normal : (wheelNormalAverage + hoverWheels[i].contactPoint.normal).normalized;
-                    }
-
-                    if (hoverWheels[i].grounded)
-                    {
-                        groundedWheels++;
-                    }
+                    wheelContactsVelocity = i == 0 ? wheels[i].contactVelocity : (wheelContactsVelocity + wheels[i].contactVelocity) * 0.5f;
+                    wheelNormalAverage = i == 0 ? wheels[i].contactPoint.normal : (wheelNormalAverage + wheels[i].contactPoint.normal).normalized;
                 }
-            }
-            else
-            {
-                for (int i = 0; i < wheels.Length; i++)
-                {
-                    if (wheels[i].grounded)
-                    {
-                        wheelContactsVelocity = i == 0 ? wheels[i].contactVelocity : (wheelContactsVelocity + wheels[i].contactVelocity) * 0.5f;
-                        wheelNormalAverage = i == 0 ? wheels[i].contactPoint.normal : (wheelNormalAverage + wheels[i].contactPoint.normal).normalized;
-                    }
 
-                    if (wheels[i].grounded)
-                    {
-                        groundedWheels++;
-                    }
+                if (wheels[i].grounded)
+                {
+                    groundedWheels++;
                 }
             }
         }
@@ -508,18 +478,12 @@ namespace RVP
     public class WheelCheckGroup
     {
         public Wheel[] wheels;
-        public HoverWheel[] hoverWheels;
 
         public void Activate()
         {
             foreach (Wheel curWheel in wheels)
             {
                 curWheel.getContact = true;
-            }
-
-            foreach (HoverWheel curHover in hoverWheels)
-            {
-                curHover.getContact = true;
             }
         }
 
@@ -528,11 +492,6 @@ namespace RVP
             foreach (Wheel curWheel in wheels)
             {
                 curWheel.getContact = false;
-            }
-
-            foreach (HoverWheel curHover in hoverWheels)
-            {
-                curHover.getContact = false;
             }
         }
     }

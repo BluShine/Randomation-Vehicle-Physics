@@ -33,50 +33,24 @@ namespace RVP
             {
                 if (targetScript.wheelGroups.Length > 0)
                 {
-                    if (targetScript.hover)
+                    foreach (Wheel curWheel in targetScript.wheels)
                     {
-                        foreach (HoverWheel curWheel in targetScript.hoverWheels)
+                        bool wheelfound = false;
+                        foreach (WheelCheckGroup curGroup in targetScript.wheelGroups)
                         {
-                            bool wheelfound = false;
-                            foreach (WheelCheckGroup curGroup in targetScript.wheelGroups)
+                            foreach (Wheel curWheelInstance in curGroup.wheels)
                             {
-                                foreach (HoverWheel curWheelInstance in curGroup.hoverWheels)
+                                if (curWheel == curWheelInstance)
                                 {
-                                    if (curWheel == curWheelInstance)
-                                    {
-                                        wheelfound = true;
-                                    }
+                                    wheelfound = true;
                                 }
-                            }
-
-                            if (!wheelfound)
-                            {
-                                wheelMissing = true;
-                                break;
                             }
                         }
-                    }
-                    else
-                    {
-                        foreach (Wheel curWheel in targetScript.wheels)
-                        {
-                            bool wheelfound = false;
-                            foreach (WheelCheckGroup curGroup in targetScript.wheelGroups)
-                            {
-                                foreach (Wheel curWheelInstance in curGroup.wheels)
-                                {
-                                    if (curWheel == curWheelInstance)
-                                    {
-                                        wheelfound = true;
-                                    }
-                                }
-                            }
 
-                            if (!wheelfound)
-                            {
-                                wheelMissing = true;
-                                break;
-                            }
+                        if (!wheelfound)
+                        {
+                            wheelMissing = true;
+                            break;
                         }
                     }
                 }
@@ -107,14 +81,7 @@ namespace RVP
                     {
                         foreach (VehicleParent curTarget in allTargets)
                         {
-                            if (curTarget.hover)
-                            {
-                                curTarget.hoverWheels = curTarget.transform.GetComponentsInChildren<HoverWheel>();
-                            }
-                            else
-                            {
-                                curTarget.wheels = curTarget.transform.GetComponentsInChildren<Wheel>();
-                            }
+                            curTarget.wheels = curTarget.transform.GetComponentsInChildren<Wheel>();
                         }
                     }
                 }
