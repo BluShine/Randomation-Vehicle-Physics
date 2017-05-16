@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: foggy
+  m_Shader: {fileID: 4800000, guid: 1bd21c9be7f6f4549a0817ebff94e8d9, type: 3}
+  m_ShaderKeywords: _EMISSION _SWITCH2_ON _SWITCH3_ON _SWITCH4_ON
+  m_LightmapFlags: 1
+  m_EnableInstancingVariants: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Tex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _Exponent1: 3.2
+    - _Exponent2: 1.8
+    - _Exponent3: 2.6
+    - _Exponent4: 1
+    - _Exposure: 0.6
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _Lod: 0
+    - _LodLevel: 0
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _Saturation: 1
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _Switch2: 1
+    - _Switch3: 1
+    - _Switch4: 1
+    - _UVSec: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _BaseColor: {r: 0.20171928, g: 0.23955598, b: 0.30147058, a: 1}
+    - _BottomColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color1: {r: 0.7415657, g: 0.7745466, b: 0.7941176, a: 1}
+    - _Color2: {r: 0.73378026, g: 0.77897924, b: 0.85294116, a: 1}
+    - _Color3: {r: 0.41441947, g: 0.44117647, b: 0.29195502, a: 1}
+    - _Color4: {r: 0.32050174, g: 0.38235295, b: 0.34652188, a: 1}
+    - _Direction1: {r: -0.16, g: 0.03, b: -2.28, a: 0}
+    - _Direction2: {r: -8, g: -8.09, b: 14.86, a: 0}
+    - _Direction3: {r: 63.5, g: -40.04, b: -52.2, a: 0}
+    - _Direction4: {r: 1.32, g: 0.7, b: 0.2, a: 0}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Euler: {r: 0, g: 0, b: 0, a: 1}
+    - _MiddleColor: {r: 1, g: 0.9224137, b: 0.6691177, a: 1}
+    - _NormalizedVector1: {r: -0.06999725, g: 0.013124485, b: -0.99746084, a: 0}
+    - _NormalizedVector2: {r: -0.42745453, g: -0.4322634, b: 0.79399675, a: 0}
+    - _NormalizedVector3: {r: 0.69448525, g: -0.43790847, b: -0.57089967, a: 0}
+    - _NormalizedVector4: {r: 0.875652, g: 0.4643609, b: 0.13267455, a: 0}
+    - _Rotation1: {r: 1, g: 0, b: 0, a: 0}
+    - _Rotation2: {r: 0, g: 1, b: 0, a: 0}
+    - _Rotation3: {r: 0, g: 0, b: 1, a: 0}
+    - _Tint: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _TopColor: {r: 0, g: 0.46551725, b: 0.7941176, a: 1}

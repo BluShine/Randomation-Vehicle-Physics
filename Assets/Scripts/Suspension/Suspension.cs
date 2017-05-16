@@ -228,18 +228,11 @@ namespace RVP
             }
 
             //Set the drive of the wheel
-            if (true)
+            if (wheel.targetDrive)
             {
-                if (wheel.targetDrive)
-                {
-                    targetDrive.active = driveEnabled;
-                    targetDrive.feedbackRPM = wheel.targetDrive.feedbackRPM;
-                    wheel.targetDrive.SetDrive(targetDrive);
-                }
-            }
-            else
-            {
-                targetDrive.feedbackRPM = targetDrive.rpm;
+                targetDrive.active = driveEnabled;
+                targetDrive.feedbackRPM = wheel.targetDrive.feedbackRPM;
+                wheel.targetDrive.SetDrive(targetDrive);
             }
         }
 

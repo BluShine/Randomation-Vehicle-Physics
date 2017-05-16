@@ -20,7 +20,6 @@ namespace RVP
         public Suspension suspensionParent;
         [System.NonSerialized]
         public Transform rim;
-        Transform tire;
         Vector3 localVel;
 
         [Tooltip("Generate a sphere collider to represent the wheel for side collisions")]
@@ -108,7 +107,6 @@ namespace RVP
         public float setTirePressure;
         [System.NonSerialized]
         public float tirePressurePrev;
-        float initialTirePressure;
 
         [Range(0, 1)]
         public float rimGlow;
@@ -159,7 +157,6 @@ namespace RVP
             vp = (VehicleParent)F.GetTopmostParentComponent<VehicleParent>(tr);
             suspensionParent = tr.parent.GetComponent<Suspension>();
             travelDist = suspensionParent.targetCompression;
-            initialTirePressure = tirePressure;
 
             if (tr.childCount > 0)
             {
@@ -591,11 +588,6 @@ namespace RVP
             if (tr.childCount > 0)
             {
                 rim = tr.GetChild(0);
-
-                if (rim.childCount > 0)
-                {
-                    tire = rim.GetChild(0);
-                }
             }
 
             float tireActualRadius = Mathf.Lerp(rimRadius, tireRadius, tirePressure);
