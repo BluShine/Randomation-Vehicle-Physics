@@ -66,21 +66,15 @@ namespace RVP
             {
                 Vector3 inverseWorldUp;
                 inverseWorldUp = vp.norm.InverseTransformDirection(Vector3.Lerp(
-                    Vector3.Lerp(GlobalControl.worldUpDir, vp.wheelNormalAverage, Mathf.Abs(Vector3.Dot(vp.norm.forward, GlobalControl.worldUpDir)) * 2),
+                    Vector3.Lerp(GlobalControl.worldUpDir, vp.wheelNormalAverage, Mathf.Abs(Vector3.Dot(tr.forward, GlobalControl.worldUpDir)) * 2),
                     vp.wheelNormalAverage, normalStickiness));
-                //inverseWorldUp = vp.wheelNormalAverage;
-                //inverseWorldUp = vp.norm.InverseTransformDirection(vp.wheelNormalAverage);
-                //Debug.DrawRay(tr.position, vp.wheelNormalAverage, Color.white);
-                //Debug.DrawRay(tr.position, GlobalControl.worldUpDir, Color.green);
-                //Debug.Log(Mathf.Abs(Vector3.Dot(vp.norm.up, GlobalControl.worldUpDir)) * 2);
 
                 //Calculate target lean direction
                 targetLean = new Vector3(
-                    Mathf.Lerp(inverseWorldUp.x, 
-                        Mathf.Clamp(-vp.rollInput * leanFactor.z * leanRollCurve.Evaluate(Mathf.Abs(vp.localVelocity.z)) + 
-                                Mathf.Clamp(vp.localVelocity.x * slideLeanFactor, -leanFactor.z * slideLeanFactor, leanFactor.z * slideLeanFactor), 
+                    Mathf.Lerp(0, 
+                        Mathf.Clamp(-vp.steerInput * leanFactor.z * leanRollCurve.Evaluate(Mathf.Abs(vp.localVelocity.z)), 
                             -leanFactor.z, leanFactor.z), 
-                        Mathf.Max(Mathf.Abs(F.MaxAbs(vp.steerInput, vp.rollInput)))),
+                        Mathf.Max(Mathf.Abs(vp.steerInput))),
                     0,
                     inverseWorldUp.z);
             }
@@ -90,27 +84,9 @@ namespace RVP
             }
 
             //Transform targetLean to world space
-            //targetLeanActual = Vector3.Lerp(targetLeanActual, vp.norm.TransformDirection(targetLean), (1 - leanSmoothness) * Time.timeScale * TimeMaster.inverseFixedTimeFactor).normalized;
             targetLeanActual = vp.norm.TransformDirection(targetLean);
             Debug.DrawRay(tr.position, targetLeanActual, Color.black);
             Debug.DrawRay(tr.position, tr.up, Color.red);
-
-            /*//Apply pitch
-            rb.AddTorque(
-                vp.norm.right * -(Vector3.Dot(vp.forwardDir, targetLeanActual) * 20 - vp.localAngularVel.x) * 100 * (vp.wheels.Length == 1 ? 1 : leanPitchCurve.Evaluate(Mathf.Abs(actualPitchInput)))
-                , ForceMode.Acceleration);
-
-            //Apply yaw
-            rb.AddTorque(
-                vp.norm.forward * (vp.groundedWheels == 1 ? vp.steerInput * leanFactor.y - vp.norm.InverseTransformDirection(rb.angularVelocity).z : 0) * 100 * leanYawCurve.Evaluate(Mathf.Abs(vp.steerInput))
-                , ForceMode.Acceleration);*/
-
-            /*//Apply roll
-            float rollAccel = (-Vector3.Dot(vp.rightDir, targetLeanActual) * 20 - vp.localAngularVel.z) * (1 / Time.fixedDeltaTime);//What does this magic number mean?
-            //rollAccel = Mathf.Clamp(rollAccel, -maxLeanForce, maxLeanForce);
-            rb.AddTorque(
-                vp.norm.up * rollAccel
-                , ForceMode.Acceleration);*/
             
             //figure out the z angle between our current rotation and target 
             float targetAngle = tr.InverseTransformDirection(Vector3.Cross(tr.up, targetLeanActual)).z;
