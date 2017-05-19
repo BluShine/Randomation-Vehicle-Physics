@@ -1,3 +1,13 @@
+# A fork of https://github.com/RandomationGames/Randomation-Vehicle-Physics focused on improved motorcycle handling.
+
+Overhauls existing vehicle balance script to replace it with a PID controller balance system. This results in much smoother handling, less wobble, and more predictable leaning behavior. 
+
+Also includes significant simplification and removal of stuff that I didn't need. Removes hover cars and wheels, removes the damage system, removes some effects, and strips out a lot of unused assets. Oh, and I threw in some pretty fog and skybox effects for no reason. 
+
+My code is liscensed under MIT liscense. Same as the original code. Enjoy!
+
+Original readme is reproduced below:
+
 # Randomation Vehicle Physics
 This is a vehicle physics system for the Unity engine, tested with Unity 5.5. It aims to achieve semi-realistic, general-purpose driving mechanics. This was originally sold on the asset store as Randomation Vehicle Physics 2.0.
 
