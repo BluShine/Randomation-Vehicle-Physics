@@ -17,12 +17,13 @@ namespace RVP
         float actualPitchInput;
         Vector3 targetLean;
         Vector3 targetLeanActual;
+        Vector3 lastLean;
 
         [Tooltip("Lean strength along each axis")]
         public Vector3 leanFactor;
 
-        [Range(0, 0.99f)]
-        public float leanSmoothness;
+        [Tooltip("Linear limit on fast you can change lean directions")]
+        public float maxLeanSpeed = 1;
 
         [Tooltip("Adjusts the roll based on the speed, x-axis = speed, y-axis = roll amount")]
         public AnimationCurve leanRollCurve = AnimationCurve.Linear(0, 0, 10, 1);
@@ -47,6 +48,7 @@ namespace RVP
             tr = transform;
             rb = GetComponent<Rigidbody>();
             vp = GetComponent<VehicleParent>();
+            lastLean = Vector3.up;
         }
 
         void FixedUpdate()
@@ -85,6 +87,11 @@ namespace RVP
 
             //Transform targetLean to world space
             targetLeanActual = vp.norm.TransformDirection(targetLean);
+            float leanMag = Vector3.Magnitude(targetLeanActual - lastLean);
+            if (leanMag > maxLeanSpeed * Time.fixedDeltaTime)
+                targetLeanActual = Vector3.Lerp(lastLean, targetLeanActual, (maxLeanSpeed * Time.fixedDeltaTime) / leanMag);
+            lastLean = targetLeanActual;
+
             Debug.DrawRay(tr.position, targetLeanActual, Color.black);
             Debug.DrawRay(tr.position, tr.up, Color.red);
             
