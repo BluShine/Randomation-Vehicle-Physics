@@ -73,9 +73,9 @@ namespace RVP
 
                 //Calculate target lean direction
                 targetLean = new Vector3(
-                    Mathf.Lerp(0, 
-                        Mathf.Clamp(-vp.steerInput * leanFactor.z * leanRollCurve.Evaluate(Mathf.Abs(vp.localVelocity.z)), 
-                            -leanFactor.z, leanFactor.z), 
+                    Mathf.Lerp(inverseWorldUp.x,
+                        inverseWorldUp.x + Mathf.Clamp(-vp.steerInput * leanFactor.z * leanRollCurve.Evaluate(Mathf.Abs(vp.localVelocity.z)),
+                            -leanFactor.z, leanFactor.z),
                         Mathf.Max(Mathf.Abs(vp.steerInput))),
                     0,
                     inverseWorldUp.z);
